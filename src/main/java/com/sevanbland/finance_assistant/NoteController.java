@@ -18,9 +18,13 @@ public class NoteController {
         return noteService.create(note.title(), note.content());
     }
 
-    @GetMapping // GET /notes -> return all notes
-    public List<Note> getAll() {
-        return noteService.findAll();
+    @GetMapping // GET /notes?search=spring -> return only matching notes
+    public List<Note> getAll(@RequestParam(defaultValue = "") String search) {
+        if (search.isEmpty()) {
+            return noteService.findAll(); // blank search term -> return all notes
+        }
+
+        return noteService.search(search); // search term -> filter
     }
 
     @GetMapping("/{id}") // GET /notes/1 -> return note #1

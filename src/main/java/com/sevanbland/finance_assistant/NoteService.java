@@ -41,4 +41,10 @@ public class NoteService {
     public void delete(Long id) {
         notes.remove(id);
     }
+
+    public List<Note> search(String keyword) {
+        return notes.values().stream()
+                .filter(n -> n.title().toLowerCase().contains(keyword.toLowerCase()))
+                .toList();
+    }
 }
