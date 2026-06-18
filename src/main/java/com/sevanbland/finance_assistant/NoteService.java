@@ -38,8 +38,8 @@ public class NoteService {
         return updated;
     }
 
-    public void delete(Long id) {
-        notes.remove(id);
+    public boolean delete(Long id) {
+        return notes.remove(id) != null;
     }
 
     public List<Note> search(String keyword) {
